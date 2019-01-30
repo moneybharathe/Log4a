@@ -1,0 +1,18 @@
+﻿[
+  {
+    "appenderName": "console",
+    "location": "",
+    "enable":  true
+  },
+  {
+    "appenderName": "localstorage",
+    "location": "logging",
+    "enable": false
+  },
+  {
+    "appenderName": "serverapi",
+    "location": "/api/log",
+    "enable": false
+  }
+
+]

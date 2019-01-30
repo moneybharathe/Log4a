@@ -1,0 +1,26 @@
+<form (ngSubmit) = "false">
+  <h1>Enable/Disable Log :</h1>
+  <label class="switch">
+
+    <input type="checkbox" [checked]='isChecked' (click) = "enableLog()">
+    <span class="slider round" ></span>
+  </label>
+
+  <!-- Rounded switch -->
+  <h1>Enable Date :</h1>
+  <label class="switch">
+
+    <input type="checkbox" checked (click) = "enableDate()">
+    <span class="slider round"></span>
+  </label>
+
+
+
+<h1>Log Level :</h1>
+<button class="btn success" (click) = "setLogLevel('Debug')">DEBUG</button>
+<button class="btn info" (click) = "setLogLevel('Info')">INFO</button>
+<button class="btn warning" (click) = "setLogLevel('Warn')">WARN</button>
+<button class="btn danger" (click) = "setLogLevel('Error')">ERROR</button>
+<button class="btn default" (click) = "setLogLevel('All')">ALL</button>
+
+
