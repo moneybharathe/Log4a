@@ -17,6 +17,20 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@ng-log/log4": [
+        "dist/ng-log/log4"
+      ],
+      "@ng-log/log4/*": [
+        "dist/ng-log/log4/*"
+      ],
+      "@ng-log/log4a": [
+        "dist/ng-log/log4a"
+      ],
+      "@ng-log/log4a/*": [
+        "dist/ng-log/log4a/*"
+      ]
+    }
   }
 }
