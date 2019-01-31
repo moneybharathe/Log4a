@@ -1,27 +1,163 @@
-# Sample
+[![npm version](https://badge.fury.io/js/%40ng-log%2Flog4a.svg)](https://badge.fury.io/js/%40ng-log%2Flog4a)
+# Log4A : Logger library for Angular6+
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.2.
+> A powerful and customizable logging library for Angular application.
 
-## Development server
+### New Features!
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+-	Pretty print log messages with timestamp, file name, method name, line number, path or call stack.
+-	Support user-defined logging levels.
+-	Support console, local-storage and server-side appenders.
+-	Support file based configuration(logging-config.json).
+-	Support runtime configuration through query param.
+-	GUI supports for enable/disable logs, timestamp, setting user-defind log level at runtime.
+	
 
-## Code scaffolding
+## Installation
+Install the dependencies and devDependencies and start the server.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+#### Prerequisite
+	-HttpClientModule
+	-rxjs latest
 
-## Build
+```sh
+$ npm install @ng-log/log4a
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+#### Configuration
+- ***FileBased Configuration***
+- ***Runtime Configuration***
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Setup
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+>   Create a json file in "assets/logging-config.json" location with below format.
+```typescript [
+{
+"appenderName": "console",
+"location": "",
+"enable":  true
+},
+{
+"appenderName": "localstorage",
+"location": "logging",
+"enable": false
+},
+{
+"appenderName": "serverapi",
+"location": "/api/log",
+"enable": false
+}
+] 
+```
+		
+#### Step2:
+> Add HttpClientModule, Log4aModule, Log4a and AppenderService
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```typescript
+
+/*Should add APP_INITIALIZER, HttpClientModule, Log4a libraries provided below */
+import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { Log4aModule, AppenderService, Log4a } from '@ng-log/log4a';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    ChildComponent
+  ],
+  imports: [
+   /*you should add HttpClientModule and Log4aModule*/
+    HttpClientModule,
+    Log4aModule,
+    BrowserModule
+  ],
+     /*you should add below services and APP_INITIALIZER here*/
+  providers: [AppenderService,Log4a
+    ,{ provide: APP_INITIALIZER,
+      useFactory: (config: Log4a) => () => config.loadConfigs(),
+      deps: [Log4a],
+      multi: true }
+    ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+#### Final step :
+>   You can inject Log4a service to avail logger service.
+
+```typescript
+    constructor(public logger: Log4A) {
+	/*you can pass any data type like String, Object type and Arrays */
+        this.logger.log('Hello Angular');
+    }
+```
+**And you will see the message in the console of browser:**
+![](img/sample-logs.png).
+
+### Support user-defined logging levels.
+
+ ```typescript
+        this.logger.debug("debug logs");
+        this.logger.warn("warn logs");
+        this.logger.error("error logs");
+        this.logger.info("info logs");
+        this.logger.log("logs");
+ ```
+![](img/003.png)
+
+## Support Multi Logging system in ***FileBased Configuration***.
+ Inspired from java ***log4j***; API provides three appenders.
+
+>   Console Appender - Console appender is a very simple service that displays logs data to the console window. 
+>   Local Storage Appender - It can store data locally with in the user’s browsers.
+>   Server logs - A server logs can store the log information from all clients in one location.
+
+you can configure one or more appenders by setting the below flag as true.
+
+```
+{
+"appenderName": "console",
+"location": "",/*Leave it as empty; should not chage this value*/
+"enable":  true /*You can enable/disable this flag to use the log system*/
+},
+{
+"appenderName": "localstorage",
+"location": "logging",/*By default location name is logging; location property is customizable*/
+"enable": false
+},
+{
+"appenderName": "serverapi",
+"location": "/api/log", /*By default location name is '/api/log'; location property is customizable*/
+"enable": false
+}
+```
+## Runtime Configuration
+-   You can configure the logger via query parameter.
+-   Support changing the logger system on the fly, while the program is running, 
+
+``` javascript
+    Console Appender : 
+    http://<apphost>:<port>/?logger-option=console
+    Local Storage Appender :
+    http://<apphost>:<port>/?logger-option=localstorage
+    Server log Appender :
+    http://<apphost>:<port>/?logger-option=webapi
+```
+***Note: If you are not passing any query param it will take configuration from “logging-config.json” file***
+
+## UI component for Managing Logs
+-   Enable/Disable Logs through UI.
+-   Enable/Disable Timestamp.
+-   Setting User-defined log levels.
+
+### Setup of UI Components
+```javascript
+import { Log4aModule} from '@ng-log/log4a';
+/**use below selector to use log ui components:**/
+<log-config></log-config>
+```
+    
