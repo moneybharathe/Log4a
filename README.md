@@ -24,13 +24,15 @@ Install the dependencies and devDependencies and start the server.
 $ npm install @ng-log/log4a
 ```
 
-#### Configuration
+## Configuration
 - ***FileBased Configuration***
 - ***Runtime Configuration***
 
 
 
-## Setup
+## Setup for both File based and Runtime configuration.
+
+#### Step1:
 
 >   Create a json file in "assets/logging-config.json" location with below format.
 ```typescript [
@@ -53,6 +55,7 @@ $ npm install @ng-log/log4a
 ```
 		
 #### Step2:
+
 > Add HttpClientModule, Log4aModule, Log4a and AppenderService
 
 
@@ -96,9 +99,15 @@ export class AppModule { }
     }
 ```
 **And you will see the message in the console of browser:**
-![](img/sample-logs.png).
 
-### Support user-defined logging levels.
+![](img/alllogs.png)
+
+** you will see the message in the Local storage area of browser:**
+
+![](img/localstorage.png)  
+
+
+## Support user-defined logging levels.
 
  ```typescript
         this.logger.debug("debug logs");
@@ -107,7 +116,7 @@ export class AppModule { }
         this.logger.info("info logs");
         this.logger.log("logs");
  ```
-![](img/003.png)
+
 
 ## Support Multi Logging system in ***FileBased Configuration***.
  Inspired from java ***log4j***; API provides three appenders.
@@ -135,6 +144,9 @@ you can configure one or more appenders by setting the below flag as true.
 "enable": false
 }
 ```
+
+
+
 ## Runtime Configuration
 -   You can configure the logger via query parameter.
 -   Support changing the logger system on the fly, while the program is running, 
@@ -160,4 +172,4 @@ import { Log4aModule} from '@ng-log/log4a';
 /**use below selector to use log ui components:**/
 <log-config></log-config>
 ```
-    
+![](img/gui-component.png)   
