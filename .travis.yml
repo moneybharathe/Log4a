@@ -4,7 +4,7 @@ addons:
 language: node_js
 node_js:
 - node
-script: echo "npm test temporarily disabled"
+script: 
 - npm run build-ci
 before_deploy:
   - cd dist/ng-log/log4a
