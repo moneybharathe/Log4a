@@ -1,0 +1,20 @@
+sudo: required
+addons:
+  chrome: stable
+language: node_js
+node_js:
+- node
+script:
+- npm run test-ci
+- npm run build-ci
+before_deploy:
+  - cd dist/ng-log/log4a
+deploy:
+  provider: npm
+  email: dreamfuture4u@gmail.com
+  skip_cleanup: true
+  api_key:
+    secure: XXX
+  on:
+    tags: true
+    repo: project/ng-log/log4a

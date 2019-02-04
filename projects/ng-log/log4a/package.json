@@ -1,8 +1,52 @@
 {
   "name": "@ng-log/log4a",
-  "version": "0.0.1",
+  "version": "2.0.5",
   "peerDependencies": {
     "@angular/common": "^7.2.0",
     "@angular/core": "^7.2.0"
-  }
+  },
+  "description": "A powerful and customizable logging library for Angular application.",
+  "main": "karma.conf.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moneybharathe/Log4a.git"
+  },
+  "keywords": [
+    "ng2",
+    "Ng2Logs",
+    "Log of angular",
+    "logs",
+    "logger",
+    "angular-logger",
+    "log4a",
+    "nglog",
+    "ng-log",
+    "@ng-log/log4a",
+    "log",
+    "logs",
+    "appender",
+    "console",
+    "localstorage",
+    "logging",
+    "angular log 6",
+    "angular log 7",
+    "angular logger",
+    "console logger",
+    "nglogger",
+    "ng console",
+    "log for angular",
+    "simple log"
+  ],
+  "author": {
+    "name": "Manibharathi",
+    "email": "dreamfuture4u@gmail.com"
+	},
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moneybharathe/Log4a/issues"
+  },
+  "homepage": "https://github.com/moneybharathe/Log4a#readme"
 }
