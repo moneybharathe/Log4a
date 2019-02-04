@@ -15,6 +15,7 @@
     "url": "git+https://github.com/moneybharathe/Log4a.git"
   },
   "keywords": [
+  	"log framework",
     "ng2",
     "Ng2Logs",
     "Log of angular",
