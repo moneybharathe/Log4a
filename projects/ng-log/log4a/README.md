@@ -1,4 +1,5 @@
 [![npm version](https://badge.fury.io/js/%40ng-log%2Flog4a.svg)](https://badge.fury.io/js/%40ng-log%2Flog4a)
+[![Build Status](https://travis-ci.org/moneybharathe/Log4a.svg?branch=master)](https://travis-ci.org/moneybharathe/Log4a)
 # Log4A : Logger library for Angular6+
 
 > A powerful and customizable logging library for Angular application.
@@ -159,7 +160,7 @@ you can configure one or more appenders by setting the below flag as true.
     Server log Appender :
     http://<apphost>:<port>/?logger-option=webapi
 ```
-***Note: If you are not passing any query param it will take configuration from “logging-config.json” file***
+***Note: If you are not passing any query param it will take configuration from logging-config.json file***
 
 ## UI component for Managing Logs
 -   Enable/Disable Logs through UI.

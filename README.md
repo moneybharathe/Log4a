@@ -1,4 +1,5 @@
 [![npm version](https://badge.fury.io/js/%40ng-log%2Flog4a.svg)](https://badge.fury.io/js/%40ng-log%2Flog4a)
+[![Build Status](https://travis-ci.org/moneybharathe/Log4a.svg?branch=master)](https://travis-ci.org/moneybharathe/Log4a)
 # Log4A : Logger library for Angular6+
 
 > A powerful and customizable logging library for Angular application.
@@ -102,7 +103,7 @@ export class AppModule { }
 
 ![](img/alllogs.png)
 
-** you will see the message in the Local storage area of browser:**
+**you will see the message in the Local storage area of browser:**
 
 ![](img/localstorage.png)  
 
@@ -122,7 +123,7 @@ export class AppModule { }
  Inspired from java ***log4j***; API provides three appenders.
 
 >   Console Appender - Console appender is a very simple service that displays logs data to the console window. 
->   Local Storage Appender - It can store data locally with in the user’s browsers.
+>   Local Storage Appender - It can store data locally with in the userâ€™s browsers.
 >   Server logs - A server logs can store the log information from all clients in one location.
 
 you can configure one or more appenders by setting the below flag as true.
@@ -159,7 +160,7 @@ you can configure one or more appenders by setting the below flag as true.
     Server log Appender :
     http://<apphost>:<port>/?logger-option=webapi
 ```
-***Note: If you are not passing any query param it will take configuration from “logging-config.json” file***
+***Note: If you are not passing any query param it will take configuration from logging-config.json file***
 
 ## UI component for Managing Logs
 -   Enable/Disable Logs through UI.
@@ -172,4 +173,6 @@ import { Log4aModule} from '@ng-log/log4a';
 /**use below selector to use log ui components:**/
 <log-config></log-config>
 ```
+
+**you can use user interface to enable/disable logs, setting Log levels**
 ![](img/gui-component.png)   
