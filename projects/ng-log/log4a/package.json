@@ -1,12 +1,6 @@
 {
   "name": "@ng-log/log4a",
   "version": "2.0.6",
-  "peerDependencies": {
-    "@angular/common": "^7.2.0",
-    "@angular/core": "^7.2.0",
-    "rxjs": ">=6.3.3"
-    
-  },
   "description": "A powerful and customizable logging library for Angular application.",
   "main": "karma.conf.js",
   "scripts": {
