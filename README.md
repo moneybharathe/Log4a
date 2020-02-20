@@ -69,23 +69,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { Log4aModule, AppenderService, Log4a } from '@ng-log/log4a';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ChildComponent
-  ],
-  imports: [
-   /*you should add HttpClientModule and Log4aModule*/
-    HttpClientModule,
-    Log4aModule,
-    BrowserModule
-  ],
-     /*you should add below services and APP_INITIALIZER here*/
-  providers: [AppenderService,Log4a
-    ,{ provide: APP_INITIALIZER,
+  declarations: [AppComponent, ChildComponent],
+  imports: [HttpClientModule, Log4aModule, BrowserModule],
+  providers: [
+    AppenderService,
+    Log4a,
+    {
+      provide: APP_INITIALIZER,
       useFactory: (config: Log4a) => () => config.loadConfigs(),
       deps: [Log4a],
-      multi: true }
-    ],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,12 +1,13 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {AppenderService,LogAppenderConfig} from './appender-impl.service';
+import {AppenderService, LogAppenderConfig} from './appender-impl.service';
 import {AbstractLogger} from './core-appender.service';
 const PUBLISHERS_FILE = 'assets/logging-config.json';
 
 @Injectable()
 export class Log4a {
   abstractAppenders: AbstractLogger[];
+  // tslint:disable-next-line: no-use-before-declare
   level: LogLevel = LogLevel.All;
   logWithDate = true;
   constructor(
@@ -33,26 +34,32 @@ export class Log4a {
   }
 
   debug(msg: string, ...optionalParams: any[]) {
+    // tslint:disable-next-line: no-use-before-declare
     this.writeToLog(msg, LogLevel.Debug, optionalParams);
   }
 
   info(msg: string, ...optionalParams: any[]) {
+    // tslint:disable-next-line: no-use-before-declare
     this.writeToLog(msg, LogLevel.Info, optionalParams);
   }
 
   warn(msg: string, ...optionalParams: any[]) {
+    // tslint:disable-next-line: no-use-before-declare
     this.writeToLog(msg, LogLevel.Warn, optionalParams);
   }
 
   error(msg: string, ...optionalParams: any[]) {
+    // tslint:disable-next-line: no-use-before-declare
     this.writeToLog(msg, LogLevel.Error, optionalParams);
   }
 
   fatal(msg: string, ...optionalParams: any[]) {
+    // tslint:disable-next-line: no-use-before-declare
     this.writeToLog(msg, LogLevel.Fatal, optionalParams);
   }
 
   log(msg: string, ...optionalParams: any[]) {
+    // tslint:disable-next-line: no-use-before-declare
     this.writeToLog(msg, LogLevel.All, optionalParams);
   }
 
@@ -66,7 +73,9 @@ export class Log4a {
     let ret = false;
 
     if (
+      // tslint:disable-next-line: no-use-before-declare
       (level >= this.level && level !== LogLevel.Off) ||
+      // tslint:disable-next-line: no-use-before-declare
       this.level === LogLevel.All
     ) {
       ret = true;
@@ -78,6 +87,7 @@ export class Log4a {
   private writeToLog(msg: string, level: LogLevel, params: any[]) {
     if (this.shouldLog(level)) {
       // Declare variables
+      // tslint:disable-next-line: no-use-before-declare
       const entry: LogEntry = new LogEntry();
 
       // Build Log Entry

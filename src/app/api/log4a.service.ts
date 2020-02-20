@@ -7,48 +7,57 @@ import {AbstractLogger} from './core-appender.service';
 })
 export class Log4aService {
   protected abstractAppenders: AbstractLogger[];
-  protected level: LogLevel = LogLevel.All;
-  protected logWithDate = true;
+  // tslint:disable-next-line: no-use-before-declare
+  level: LogLevel = LogLevel.All;
+  logWithDate = true;
 
   constructor(private tiaaAppenderService: AppenderImplService) {
     this.abstractAppenders = this.tiaaAppenderService.appenders;
   }
 
   debug(msg: string, ...optionalParams: any[]) {
+    // tslint:disable-next-line: no-use-before-declare
     this.writeToLog(msg, LogLevel.Debug, optionalParams);
   }
 
   info(msg: string, ...optionalParams: any[]) {
+    // tslint:disable-next-line: no-use-before-declare
     this.writeToLog(msg, LogLevel.Info, optionalParams);
   }
 
   warn(msg: string, ...optionalParams: any[]) {
+    // tslint:disable-next-line: no-use-before-declare
     this.writeToLog(msg, LogLevel.Warn, optionalParams);
   }
 
   error(msg: string, ...optionalParams: any[]) {
+    // tslint:disable-next-line: no-use-before-declare
     this.writeToLog(msg, LogLevel.Error, optionalParams);
   }
 
   fatal(msg: string, ...optionalParams: any[]) {
+    // tslint:disable-next-line: no-use-before-declare
     this.writeToLog(msg, LogLevel.Fatal, optionalParams);
   }
 
   log(msg: string, ...optionalParams: any[]) {
+    // tslint:disable-next-line: no-use-before-declare
     this.writeToLog(msg, LogLevel.All, optionalParams);
   }
 
   clear(): void {
-    for (let logger of this.abstractAppenders) {
+    for (const logger of this.abstractAppenders) {
       logger.clear().subscribe(response => console.log(response));
     }
   }
 
   private shouldLog(level: LogLevel): boolean {
-    let ret: boolean = false;
+    let ret = false;
 
     if (
+      // tslint:disable-next-line: no-use-before-declare
       (level >= this.level && level !== LogLevel.Off) ||
+      // tslint:disable-next-line: no-use-before-declare
       this.level === LogLevel.All
     ) {
       ret = true;
@@ -60,6 +69,7 @@ export class Log4aService {
   private writeToLog(msg: string, level: LogLevel, params: any[]) {
     if (this.shouldLog(level)) {
       // Declare variables
+      // tslint:disable-next-line: no-use-before-declare
       const entry: LogEntry = new LogEntry();
 
       // Build Log Entry
@@ -68,7 +78,7 @@ export class Log4aService {
       entry.extraInfo = params;
       entry.logWithDate = this.logWithDate;
 
-      for (let logger of this.abstractAppenders) {
+      for (const logger of this.abstractAppenders) {
         logger.log(entry);
       }
     }
@@ -164,7 +174,7 @@ export class LogEntry {
     if (params.some(p => typeof p === 'object')) {
       ret = '';
       // Build comma-delimited string
-      for (let item of params) {
+      for (const item of params) {
         ret += JSON.stringify(item) + ',';
       }
     }

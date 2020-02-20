@@ -22,7 +22,7 @@ export class AppenderImplService {
     let appender: AbstractLogger;
 
     this.getLoggers().subscribe(response => {
-      for (let pub of response.filter(p => p.enable)) {
+      for (const pub of response.filter(p => p.enable)) {
         switch (pub.appenderName.toLowerCase()) {
           case 'console':
             appender = new ConsoleAppender();
