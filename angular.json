@@ -130,7 +130,6 @@
         }
       }
     },
-
     "@ng-log/log4a": {
       "root": "projects/ng-log/log4a",
       "sourceRoot": "projects/ng-log/log4a/src",
@@ -167,5 +166,8 @@
       }
     }
   },
-  "defaultProject": "sample"
+  "defaultProject": "sample",
+  "cli": {
+    "analytics": false
+  }
 }

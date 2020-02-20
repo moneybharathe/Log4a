@@ -1,18 +1,18 @@
-import { Injectable } from '@angular/core';
-import { AppenderImplService } from 'src/app/api/appender-impl.service';
-import { AbstractLogger } from './core-appender.service';
+import {Injectable} from '@angular/core';
+import {AppenderImplService} from 'src/app/api/appender-impl.service';
+import {AbstractLogger} from './core-appender.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Log4aService {
-  abstractAppenders: AbstractLogger[];
-  level: LogLevel = LogLevel.All;
-  logWithDate: boolean = true;
-  constructor(private tiaaAppenderService: AppenderImplService ){
+  protected abstractAppenders: AbstractLogger[];
+  protected level: LogLevel = LogLevel.All;
+  protected logWithDate = true;
+
+  constructor(private tiaaAppenderService: AppenderImplService) {
     this.abstractAppenders = this.tiaaAppenderService.appenders;
   }
-
 
   debug(msg: string, ...optionalParams: any[]) {
     this.writeToLog(msg, LogLevel.Debug, optionalParams);
@@ -40,45 +40,40 @@ export class Log4aService {
 
   clear(): void {
     for (let logger of this.abstractAppenders) {
-      logger.clear()
-        .subscribe(response => console.log(response));
+      logger.clear().subscribe(response => console.log(response));
     }
   }
 
-    private shouldLog(level: LogLevel): boolean {
-      let ret: boolean = false;
+  private shouldLog(level: LogLevel): boolean {
+    let ret: boolean = false;
 
-      if ((level >= this.level &&
-        level !== LogLevel.Off) ||
-        this.level === LogLevel.All) {
-        ret = true;
-      }
-
-      return ret;
+    if (
+      (level >= this.level && level !== LogLevel.Off) ||
+      this.level === LogLevel.All
+    ) {
+      ret = true;
     }
 
-    private writeToLog(msg: string, level: LogLevel, params: any[]) {
-      if (this.shouldLog(level)) {
-        // Declare variables
-        let entry: LogEntry = new LogEntry();
+    return ret;
+  }
 
-        // Build Log Entry
-        entry.message = msg;
-        entry.level = level;
-        entry.extraInfo = params;
-        entry.logWithDate = this.logWithDate;
+  private writeToLog(msg: string, level: LogLevel, params: any[]) {
+    if (this.shouldLog(level)) {
+      // Declare variables
+      const entry: LogEntry = new LogEntry();
 
-        for (let logger of this.abstractAppenders) {
-          logger.log(entry)
-            // .subscribe(response => console.log(response));
-        }
+      // Build Log Entry
+      entry.message = msg;
+      entry.level = level;
+      entry.extraInfo = params;
+      entry.logWithDate = this.logWithDate;
+
+      for (let logger of this.abstractAppenders) {
+        logger.log(entry);
       }
     }
-
-
+  }
 }
-
-
 
 export enum LogLevel {
   All = 0,
@@ -93,68 +88,87 @@ export enum LogLevel {
 export class LogEntry {
   // Public Properties
   entryDate: Date = new Date();
-  message: string = "";
+  message = '';
   level: LogLevel = LogLevel.Debug;
   extraInfo: any[] = [];
-  logWithDate: boolean = true;
+  logWithDate = true;
 
   // **************
   // Public Methods
   // **************
   buildLogString(): void {
-    let value:string = "";
+    let value = '';
 
     if (this.logWithDate) {
-      value = new Date() + "";
+      value = new Date() + '';
     }
-   // value += "Type: " + LogLevel[this.level];
-    value += " - Message: " + this.message;
+    // value += "Type: " + LogLevel[this.level];
+    value += ' - Message: ' + this.message;
     if (this.extraInfo.length) {
-      value += " - Extra Info: "
-        + this.formatParams(this.extraInfo);
+      value += ' - Extra Info: ' + this.formatParams(this.extraInfo);
     }
 
-    switch(LogLevel[this.level]){
+    switch (LogLevel[this.level]) {
       case 'Debug':
-        console.info('%c Type: ['+ LogLevel[this.level]+']%c'+value, '  border-bottom-color: blue; background: blue; color: white; display: block; font-weight: bold;','background: white;border-bottom: 1px solid blue; font-weight: 900;color:blue');
-      break;
+        console.log(
+          '%c Type: [' + LogLevel[this.level] + ']%c' + value,
+          '  border-bottom-color: blue; background: blue; color: white; display: block; font-weight: bold;',
+          'background: white;border-bottom: 1px solid blue; font-weight: 900;color:blue'
+        );
+        break;
       case 'Info':
-        console.info('%c Type: ['+ LogLevel[this.level]+']%c'+value, '  border-bottom-color: blue; background: blue; color: white; display: block; font-weight: bold;','background: white;border-bottom:1px solid blue; font-weight: 900;color:blue');
-      break;
+        console.log(
+          '%c Type: [' + LogLevel[this.level] + ']%c' + value,
+          '  border-bottom-color: blue; background: blue; color: white; display: block; font-weight: bold;',
+          'background: white;border-bottom:1px solid blue; font-weight: 900;color:blue'
+        );
+        break;
       case 'Warn':
-        console.warn('%c Type: ['+ LogLevel[this.level]+']%c'+value, '  border-bottom-color: black; background: orange; color: white; display: block; font-weight: bold;','background: white;border-bottom: 1px solid orange; font-weight: 900; ');
-      break;
+        console.warn(
+          '%c Type: [' + LogLevel[this.level] + ']%c' + value,
+          '  border-bottom-color: black; background: orange; color: white; display: block; font-weight: bold;',
+          'background: white;border-bottom: 1px solid orange; font-weight: 900; '
+        );
+        break;
       case 'Error':
-        console.error('%c Type: ['+ LogLevel[this.level]+']%c'+value, '  border-bottom-color: white; background: red; color: white; display: block; font-weight: bold;','background:  ;border-bottom: 1px solid red; font-weight: 900; color:red');
-      break;
+        console.error(
+          '%c Type: [' + LogLevel[this.level] + ']%c' + value,
+          '  border-bottom-color: white; background: red; color: white; display: block; font-weight: bold;',
+          'background:  ;border-bottom: 1px solid red; font-weight: 900; color:red'
+        );
+        break;
       case 'Fatal':
-        console.error('%c Type: ['+ LogLevel[this.level]+']%c'+value, '  border-bottom-color: white; background: red; color: white; display: block; font-weight: bold;','background:  ;border-bottom: 1px solid red; font-weight: 900; color:red');
-      break;
-      case  'All':
-        console.info('%c Type: ['+ LogLevel[this.level]+']%c'+value, '  border-bottom-color: blue; background: blue; color: white; display: block; font-weight: bold;','background: white;border-bottom: 1px solid blue; font-weight: 900;color:blue');
-      break;
+        console.error(
+          '%c Type: [' + LogLevel[this.level] + ']%c' + value,
+          '  border-bottom-color: white; background: red; color: white; display: block; font-weight: bold;',
+          'background:  ;border-bottom: 1px solid red; font-weight: 900; color:red'
+        );
+        break;
+      case 'All':
+        console.log(
+          '%c Type: [' + LogLevel[this.level] + ']%c' + value,
+          '  border-bottom-color: blue; background: blue; color: white; display: block; font-weight: bold;',
+          'background: white;border-bottom: 1px solid blue; font-weight: 900;color:blue'
+        );
+        break;
     }
-
-    //return value;
   }
 
   // ***************
   // Private Methods
   // ***************
   private formatParams(params: any[]): string {
-    let ret:string = params.join(",");
+    let ret: string = params.join(',');
 
     // Is there at least one object in the array?
-    if (params.some(p => typeof p == "object")) {
-      ret = "";
+    if (params.some(p => typeof p === 'object')) {
+      ret = '';
       // Build comma-delimited string
       for (let item of params) {
-        ret += JSON.stringify(item) + ",";
+        ret += JSON.stringify(item) + ',';
       }
     }
 
     return ret;
   }
 }
-
-

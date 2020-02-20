@@ -36,7 +36,8 @@ $ npm install @ng-log/log4a
 #### Step1:
 
 >   Create a json file in "assets/logging-config.json" location with below format.
-```typescript [
+```typescript 
+[
 {
 "appenderName": "console",
 "location": "",
