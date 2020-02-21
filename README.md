@@ -86,6 +86,7 @@ import { Log4aModule, AppenderService, Log4a } from '@ng-log/log4a';
 export class AppModule { }
 ```
 
+
 #### Final step :
 >   You can inject Log4a service to avail logger service.
 
@@ -172,3 +173,10 @@ import { Log4aModule} from '@ng-log/log4a';
 
 **you can use user interface to enable/disable logs, setting Log levels**
 ![](img/gui-component.png)   
+
+
+### Errors and Solutions
+
+>   main.ts:12 NullInjectorError: R3InjectorError[ApplicationModule -> ApplicationRef -> ApplicationInitStatus -> InjectionToken Application Initializer -> [object Object] -> Log4a -> AppenderService -> HttpClient -> HttpClient -> HttpClient]: NullInjectorError: No provider for HttpClient!
+
+>   Solutions : Please import HttpClient Module in your Appmodule / Bootstrap Module.

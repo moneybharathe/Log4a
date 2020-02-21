@@ -36,7 +36,8 @@ $ npm install @ng-log/log4a
 #### Step1:
 
 >   Create a json file in "assets/logging-config.json" location with below format.
-```typescript [
+```typescript 
+[
 {
 "appenderName": "console",
 "location": "",
@@ -68,27 +69,23 @@ import { HttpClientModule } from '@angular/common/http';
 import { Log4aModule, AppenderService, Log4a } from '@ng-log/log4a';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ChildComponent
-  ],
-  imports: [
-   /*you should add HttpClientModule and Log4aModule*/
-    HttpClientModule,
-    Log4aModule,
-    BrowserModule
-  ],
-     /*you should add below services and APP_INITIALIZER here*/
-  providers: [AppenderService,Log4a
-    ,{ provide: APP_INITIALIZER,
+  declarations: [AppComponent, ChildComponent],
+  imports: [HttpClientModule, Log4aModule, BrowserModule],
+  providers: [
+    AppenderService,
+    Log4a,
+    {
+      provide: APP_INITIALIZER,
       useFactory: (config: Log4a) => () => config.loadConfigs(),
       deps: [Log4a],
-      multi: true }
-    ],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
 ```
+
 
 #### Final step :
 >   You can inject Log4a service to avail logger service.
@@ -176,3 +173,10 @@ import { Log4aModule} from '@ng-log/log4a';
 
 **you can use user interface to enable/disable logs, setting Log levels**
 ![](img/gui-component.png)   
+
+
+### Errors and Solutions
+
+>   main.ts:12 NullInjectorError: R3InjectorError[ApplicationModule -> ApplicationRef -> ApplicationInitStatus -> InjectionToken Application Initializer -> [object Object] -> Log4a -> AppenderService -> HttpClient -> HttpClient -> HttpClient]: NullInjectorError: No provider for HttpClient!
+
+>   Solutions : Please import HttpClient Module in your Appmodule / Bootstrap Module.
