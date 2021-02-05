@@ -128,7 +128,7 @@ you can configure one or more appenders by setting the below flag as true.
 ```
 {
 "appenderName": "console",
-"location": "",/*Leave it as empty; should not chage this value*/
+"location": "",/*Leave it as empty; should not change this value*/
 "enable":  true /*You can enable/disable this flag to use the log system*/
 },
 {
