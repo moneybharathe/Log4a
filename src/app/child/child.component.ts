@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Log4a} from '@ng-log/log4a';
+import { Log4a } from 'projects/ng-log/log4a/src/public_api';
 
 @Component({
   selector: 'app-child',

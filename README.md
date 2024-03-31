@@ -1,6 +1,6 @@
 [![npm version](https://badge.fury.io/js/%40ng-log%2Flog4a.svg)](https://badge.fury.io/js/%40ng-log%2Flog4a)
 [![Build Status](https://travis-ci.org/moneybharathe/Log4a.svg?branch=master)](https://travis-ci.org/moneybharathe/Log4a)
-# Log4A : Logger library for Angular6+
+# Log4A : Logger library for Angular15+
 
 > A powerful and customizable logging library for Angular application.
 

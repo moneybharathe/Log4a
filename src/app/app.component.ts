@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Log4a} from '@ng-log/log4a';
+import { Log4a } from 'projects/ng-log/log4a/src/public_api';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,7 @@ import {Log4a} from '@ng-log/log4a';
 export class AppComponent implements OnInit {
   title = 'sample';
   constructor(public logger: Log4a) {
-    this.logger.log('asfasdfsaf');
+    this.logger.log('test');
   }
 
   ngOnInit() {

@@ -1,8 +1,7 @@
 ﻿import {Component} from '@angular/core';
 
 import {Product} from './product';
-import {Log4aService, LogLevel} from '../api/log4a.service';
-import {LogEntry} from 'src/app/api/log4a.service';
+import { Log4a, LogEntry, LogLevel } from 'projects/ng-log/log4a/src/public_api';
 // Add this
 
 @Component({
@@ -11,12 +10,12 @@ import {LogEntry} from 'src/app/api/log4a.service';
   templateUrl: './log-test.component.html'
 })
 export class LogTestComponent {
-  constructor(private logger: Log4aService) {
+  constructor(private logger: Log4a) {
     // Inject providers
   }
 
   // Public Properties
-  logEntries: LogEntry[];
+  logEntries!: LogEntry[];
 
   toggleLogging(): void {
     this.logger.level = LogLevel.All ? LogLevel.Off : LogLevel.All;
@@ -67,7 +66,7 @@ export class LogTestComponent {
   }
 
   objectTest(): void {
-    const product = new Product();
+    const product = {} as Product;
     product.productId = 10;
     product.productName = 'A New Product';
     product.introductionDate = new Date();
@@ -85,7 +84,7 @@ export class LogTestComponent {
 
   allTypesTest(): void {
     const values = ['1', 'Paul', 'Smith'];
-    const product = new Product();
+    const product = {} as Product;
     product.productId = 10;
     product.productName = 'A New Product';
     product.introductionDate = new Date();

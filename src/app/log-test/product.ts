@@ -1,4 +1,4 @@
-﻿export class Product {
+﻿export type Product = {
   productId: number;
   productName: string;
   introductionDate: Date;

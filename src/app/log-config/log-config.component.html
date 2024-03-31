@@ -15,12 +15,46 @@
   </label>
 
 
+<br>
+<br>
+<br>
+<fieldset >
+  <legend>Log Level :</legend>
 
-<h1>Log Level :</h1>
-<button class="btn success" (click) = "setLogLevel('Debug')">DEBUG</button>
-<button class="btn info" (click) = "setLogLevel('Info')">INFO</button>
-<button class="btn warning" (click) = "setLogLevel('Warn')">WARN</button>
-<button class="btn danger" (click) = "setLogLevel('Error')">ERROR</button>
-<button class="btn default" (click) = "setLogLevel('All')">ALL</button>
+  <div>
+    <input type="radio" id="debug" name="log" value="Debug" checked (change) = "setLogLevel('Debug')"/>
+    <label for="debug">Debug</label>
+  </div>
+
+  <div>
+    <input type="radio" id="info" name="log" value="Info"  (change) = "setLogLevel('Info')"/>
+    <label for="info">Info</label>
+  </div>
+
+  <div>
+    <input type="radio" id="warn" name="log" value="warn"  (change) = "setLogLevel('Warn')"/>
+    <label for="warn">Warn</label>
+  </div>
+
+  <div>
+    <input type="radio" id="error" name="log" value="Error"  (change) = "setLogLevel('Error')"/>
+    <label for="error">Error</label>
+  </div>
+
+  <div>
+    <input type="radio" id="all" name="log" value="All"  (change) = "setLogLevel('All')"/>
+    <label for="all">All</label>
+  </div>
+</fieldset>
+
+
+<br>
+
+<input type="button" (click) = "logger.debug('test')" value="Debug Test"/><br><br>
+<input type="button" (click) = "logger.info('test')" value="Info Test"/><br><br>
+<input type="button" (click) = "logger.warn('test')" value="Warn Test"/><br><br>
+<input type="button" (click) = "logger.error('test')" value="Error Test"/><br><br>
+<input type="button" (click) = "logger.log('test')" value="All Test"/><br><br>
+
 
 

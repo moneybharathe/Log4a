@@ -1,24 +1,28 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule, APP_INITIALIZER} from '@angular/core';
-import {AppComponent} from './app.component';
-import {HttpClientModule} from '@angular/common/http';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
-import {ChildComponent} from './child/child.component';
-import {Log4aModule, AppenderService, Log4a} from '@ng-log/log4a';
+import { AppRoutingModule } from './app-routing.module';
+import { ChildComponent } from './child/child.component';
+import { AppComponent } from './app.component';
+import { AppenderService, Log4a } from 'projects/ng-log/log4a/src/public_api';
+import { LogTestComponent } from './log-test/log-test.component';
+import { LogConfigComponent } from './log-config/log-config.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [AppComponent, ChildComponent],
-  imports: [HttpClientModule, Log4aModule, BrowserModule],
-  providers: [
-    AppenderService,
+  declarations: [AppComponent, ChildComponent, LogConfigComponent, LogTestComponent, LogConfigComponent],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+
+providers: [
     Log4a,
     {
       provide: APP_INITIALIZER,
       useFactory: (config: Log4a) => () => config.loadConfigs(),
       deps: [Log4a],
-      multi: true
-    }
+      multi: true,
+    },
+    AppenderService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

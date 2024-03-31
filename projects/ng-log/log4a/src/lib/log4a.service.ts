@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {AppenderService, LogAppenderConfig} from './appender-impl.service';
-import {AbstractLogger} from './core-appender.service';
+import { AppenderService } from './appender-impl.service';
+import { AbstractLogger, LogAppenderConfig } from './log4a.model';
 const PUBLISHERS_FILE = 'assets/logging-config.json';
 
 @Injectable()
@@ -11,25 +11,23 @@ export class Log4a {
   level: LogLevel = LogLevel.All;
   logWithDate = true;
   constructor(
-    public tiaaAppenderService: AppenderService,
+    public appenderService: AppenderService,
     public http: HttpClient
   ) {
-    this.abstractAppenders = tiaaAppenderService.appenders;
+    this.abstractAppenders = appenderService.appenders;
   }
 
   async loadConfigs() {
-    const loggerOption = this.tiaaAppenderService.getQueryParams(
+    const loggerOption = this.appenderService.getQueryParams(
       'logger-option'
     );
     if (loggerOption !== '') {
-      this.tiaaAppenderService.loadRuntimeConfig();
+      this.appenderService.loadRuntimeConfig();
     } else {
-      const file = await this.http
-        .get<LogAppenderConfig[]>(PUBLISHERS_FILE)
-        .toPromise()
-        .then(res => {
-          this.tiaaAppenderService.loadConfig(res);
-        });
+      this.http
+        .get<LogAppenderConfig[]>(PUBLISHERS_FILE).subscribe((res)=> {
+          this.appenderService.loadConfig(res);
+        })
     }
   }
 
@@ -65,7 +63,7 @@ export class Log4a {
 
   clear(): void {
     for (const logger of this.abstractAppenders) {
-      logger.clear().subscribe(response => console.log(response));
+      logger.clear().subscribe((response: any) => console.log(response));
     }
   }
 

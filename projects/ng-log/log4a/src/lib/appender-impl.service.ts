@@ -1,23 +1,19 @@
 import { Injectable } from '@angular/core';
-import { LocalStorageAppender, AbstractLogger, ConsoleAppender, WebApiAppender } from './core-appender.service';
-import { Observable, throwError } from 'rxjs';
+import { LocalStorageAppender, ConsoleAppender, WebApiAppender } from './core-appender.service';
 import { HttpClient } from '@angular/common/http';
+import { AbstractLogger, LogAppenderConfig } from './log4a.model';
 
 @Injectable()
 export class AppenderService {
+
+  appenders: AbstractLogger[] = [];
+
   constructor(private http: HttpClient) {
     console.log('AppenderService Initiated');
   }
 
-  logConfig: LogAppenderConfig[];
-
-
-
-  appenders: AbstractLogger[] = [];
-
-
   loadConfig(logConfig: LogAppenderConfig[]) {
-    let appender: AbstractLogger;
+    let appender = {} as AbstractLogger;
     for (const pub of logConfig.filter(p => p.enable)) {
       switch (pub.appenderName.toLowerCase()) {
         case 'console':
@@ -39,10 +35,8 @@ export class AppenderService {
     }
   }
 
-
-
   loadRuntimeConfig(): void {
-    let appender: AbstractLogger;
+    let appender = {} as AbstractLogger;
       console.log(this.getQueryParams('logger-option'));
       switch (this.getQueryParams('logger-option')) {
         case 'console':
@@ -58,33 +52,11 @@ export class AppenderService {
       this.appenders.push(appender);
   }
 
-  public getQueryParams(param): string {
+  public getQueryParams(param: string): string {
     const href = location.href;
     const reg = new RegExp('[?&]' + param + '=([^&#]*)', 'i');
     const string = reg.exec(href);
     return string ? string[1] : '';
   }
 
-  private handleErrors(error: any): Observable<any> {
-    const errors: string[] = [];
-    let msg = '';
-
-    msg = 'Status: ' + error.status;
-    msg += ' - Status Text: ' + error.statusText;
-    if (error.json()) {
-      msg += ' - Exception Message: ' + error.json().exceptionMessage;
-    }
-    errors.push(msg);
-
-    console.error('An error occurred', errors);
-
-    return throwError(errors);
-  }
-
-}
-
-export class LogAppenderConfig {
-  appenderName: string;
-  location: string;
-  enable: boolean;
 }
