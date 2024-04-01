@@ -93,6 +93,42 @@
           }
         }
       }
+     
+    },
+    "@ng-log/log4a": {
+      "root": "projects/ng-log/log4a",
+      "sourceRoot": "projects/ng-log/log4a/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/ng-log/log4a/tsconfig.lib.json",
+            "project": "projects/ng-log/log4a/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-log/log4a/src/test.ts",
+            "tsConfig": "projects/ng-log/log4a/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-log/log4a/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-log/log4a/tsconfig.lib.json",
+              "projects/ng-log/log4a/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@ng-log/log4a",
-  "version": "3.0.1",
+  "version": "4.0.0",
   "description": "A powerful and customizable logging library for Angular application.",
   "main": "karma.conf.js",
   "scripts": {

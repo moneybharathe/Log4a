@@ -8,6 +8,8 @@
 
 # Node
 /node_modules
+projects/ng-log/log4a/node_modules
+projects/ng-log/log4a/package-lock.json
 npm-debug.log
 yarn-error.log
 
