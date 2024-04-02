@@ -36,23 +36,23 @@ $ npm install @ng-log/log4a
 #### Step1:
 
 >   Create a json file in "assets/logging-config.json" location with below format.
-```typescript 
+```json 
 [
-{
-"appenderName": "console",
-"location": "",
-"enable":  true
-},
-{
-"appenderName": "localstorage",
-"location": "logging",
-"enable": false
-},
-{
-"appenderName": "serverapi",
-"location": "/api/log",
-"enable": false
-}
+  {
+    "appenderName": "console",
+    "location": "",
+    "enable":  true
+  },
+  {
+    "appenderName": "localstorage",
+    "location": "logging",
+    "enable": false
+  },
+  {
+    "appenderName": "serverapi",
+    "location": "/api/log",
+    "enable": false
+  }
 ] 
 ```
 		
@@ -147,7 +147,7 @@ you can configure one or more appenders by setting the below flag as true.
 
 ## Runtime Configuration
 -   You can configure the logger via query parameter.
--   Support changing the logger system on the fly, while the program is running, 
+-   Support changing the logger system on runtime, no need to restart the server, 
 
 ``` javascript
     Console Appender : 
